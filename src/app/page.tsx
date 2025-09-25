@@ -5,19 +5,26 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { Host } from "@/models/host";
 import Cards from "@/components/ui/cards";
+import axios from "axios";
 
-export default function Home() {
+const URI = process.env.URI;
+
+export default async function Home() {
 
   const hosts: Host[] = [];
 
+  const {data} = await axios.get(`${URI}/`);
+
+  console.log(data);
+
   return (
     <>
-      <header className="relative bg-company-orange w-[1280] h-[80] m-auto rounded-xl mt-[35] text-right">
+      <header className="relative bg-company-orange sm:w-[93.75%] max-w-[1280px] h-[80] m-auto rounded-xl mt-[35] text-right">
         <span className="absolute block p-[5] bg-white rounded-xl top-[-15] border-[5] border-company-orange">
-          <Image className="bg-white" src={logo} alt="alfredone logo" width={90} height={90} />
+          <Image className="bg-white" src={logo} alt="alfredone logo" width={90} height={90} priority />
         </span>
         <Button asChild>
-          <Link className="relative block border border-white border-2 text-white top-[22] right-[40] hover:bg-white hover:text-company-orange" href={"#"}>
+          <Link className="relative block border border-white border-2 text-white top-[22] right-[40] hover:bg-white hover:text-company-orange" href={"/add"}>
             <Plus strokeWidth={4} />
             Add Address
           </Link>

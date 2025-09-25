@@ -6,5 +6,8 @@
 @theme {
   --color-company-orange: #FF6600;
   --color-white: #FFF;
+  --color-modal-bkg: #00000040;
+
+  --breakpoint-mm: 35rem;
 }
 
