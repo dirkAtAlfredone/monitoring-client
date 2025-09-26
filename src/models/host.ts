@@ -1,6 +1,6 @@
-export interface Host {
+export interface IHost {
   name: string,
   ip: string,
   description?: string,
-  online: boolean
+  online?: boolean
 }
