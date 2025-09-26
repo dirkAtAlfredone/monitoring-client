@@ -7,7 +7,6 @@ import { Label } from "@/components/shadcn/label";
 import { Textarea } from "@/components/shadcn/textarea";
 import Modal from "@/components/ui/modal";
 import { IHost } from "@/models/host";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef } from "react";
 
