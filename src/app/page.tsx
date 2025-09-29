@@ -13,6 +13,7 @@ export default async function Home() {
 
   try {
     const {data: hosts} = await axios.get(`${URI}/api/v1/address`);
+    
     return (
       <>
         <header className="relative bg-company-orange sm:w-[93.75%] max-w-[1280px] h-[80] m-auto rounded-xl mt-[35] text-right">
@@ -30,6 +31,7 @@ export default async function Home() {
       </>
     );
   } catch (e) {
+    console.log(e)
     notFound();
   }
 }

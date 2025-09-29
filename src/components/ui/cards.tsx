@@ -1,5 +1,6 @@
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/shadcn/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/shadcn/card";
 import { IHost } from "@/models/host";
+import Status from "./status";
 
 export default function Cards({ hosts }: { hosts: IHost[] }) {
 
@@ -13,6 +14,12 @@ export default function Cards({ hosts }: { hosts: IHost[] }) {
                 <CardTitle>{host.name}</CardTitle>
                 <CardDescription>{host.ip}</CardDescription>
               </CardHeader>
+              <CardContent>
+
+              </CardContent>
+              <CardFooter>
+                <Status host={host} />
+              </CardFooter>
             </Card>
           )
         })
