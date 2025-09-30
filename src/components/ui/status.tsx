@@ -9,7 +9,8 @@ const URI = process.env.NEXT_PUBLIC_URI;
 export default function Status({ host }: { host: IHost }) {
 
   const [loaded, setLoaded] = useState(false);
-  const [status, setStatus] = useState(HostStatus.pinging);
+  const [status, setStatus] = useState(host.status);
+  const [countdown, setCountdown] = useState(60);
 
   const intervalRef = useRef<NodeJS.Timeout>(null);
 
@@ -25,26 +26,36 @@ export default function Status({ host }: { host: IHost }) {
     if (!loaded) {
       setLoaded(true);
     } else {
+      // (async () => {
+      //   await checkPing();
+      //   const intervalId = setInterval(async () => await checkPing(), 60000);
+      //   if(!!intervalRef.current && intervalId !== intervalRef.current){
+      //     clearInterval(intervalRef.current);
+      //     intervalRef.current = intervalId;
+      //   }
+      // })();
+
       (async () => {
-        await checkPing();
-        const intervalId = setInterval(async () => await checkPing(), 60000);
-        if(!!intervalRef.current && intervalId !== intervalRef.current){
-          clearInterval(intervalRef.current);
-          intervalRef.current = intervalId;
+        if (countdown <= 0) {
+          setCountdown(60);
+          await checkPing()
+        }
+        else {
+          setTimeout(() => setCountdown(countdown - 1), 1000);
         }
       })();
     }
     return () => {
-      if(!!intervalRef.current){
+      if (!!intervalRef.current) {
         clearInterval(intervalRef.current);
       }
     }
-  });
+  }, [countdown, loaded]);
 
   return (
     <>
       <p className="absolute">
-        status: <span>{status}</span>
+        status: <span>{status} ({countdown})</span>
       </p>
     </>
   );
