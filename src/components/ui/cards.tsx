@@ -9,7 +9,7 @@ export default function Cards({ hosts }: { hosts: IHost[] }) {
       {
         hosts.map(host => {
           return (
-            <Card className="relative w-[30%] hover:cursor-pointer" key={host.name}>
+            <Card className="relative w-[30%] hover:cursor-pointer" key={host.id}>
               <CardHeader>
                 <CardTitle>{host.name}</CardTitle>
                 <CardDescription>{host.ip}</CardDescription>

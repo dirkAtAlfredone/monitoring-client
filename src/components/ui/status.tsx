@@ -26,19 +26,21 @@ export default function Status({ host }: { host: IHost }) {
     if (!loaded) {
       setLoaded(true);
     } else {
-      // (async () => {
-      //   await checkPing();
-      //   const intervalId = setInterval(async () => await checkPing(), 60000);
-      //   if(!!intervalRef.current && intervalId !== intervalRef.current){
-      //     clearInterval(intervalRef.current);
-      //     intervalRef.current = intervalId;
-      //   }
-      // })();
-
       (async () => {
+
+        if(status === "pinging"){
+          const {data} = await axios.get(`${URI}/api/v1/ping/icmp/${host.ip}`);
+          setStatus(data.status);
+        }
+
         if (countdown <= 0) {
           setCountdown(60);
-          await checkPing()
+          await checkPing();
+          const intervalId = setInterval(async () => await checkPing(), 60000);
+          if(!!intervalRef.current && intervalId !== intervalRef.current){
+            clearInterval(intervalRef.current);
+            intervalRef.current = intervalId;
+          }
         }
         else {
           setTimeout(() => setCountdown(countdown - 1), 1000);
@@ -55,7 +57,7 @@ export default function Status({ host }: { host: IHost }) {
   return (
     <>
       <p className="absolute">
-        status: <span>{status} ({countdown})</span>
+        status: <span>{`${status}${status === "pinging" ? "..." : `(${countdown})`}`}</span>
       </p>
     </>
   );
