@@ -18,6 +18,7 @@ export default function Status({ host }: { host: IHost }) {
 
     const checkPing = async () => {
       const { data } = await axios.get(`${URI}/api/v1/address/status/${host.id}`);
+      console.log("status", data);
       if (data.status !== status) {
         setStatus(data.status);
       }

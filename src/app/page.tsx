@@ -13,6 +13,7 @@ export default async function Home() {
 
   try {
     const {data: hosts} = await axios.get(`${URI}/api/v1/address`);
+    console.log("main", hosts);
     
     return (
       <>
