@@ -34,13 +34,13 @@ export default function Status({ host }: { host: IHost }) {
         }
 
         if (countdown <= 0) {
-          setCountdown(60);
           await checkPing();
           const intervalId = setInterval(async () => await checkPing(), 60000);
           if(!!intervalRef.current && intervalId !== intervalRef.current){
             clearInterval(intervalRef.current);
             intervalRef.current = intervalId;
           }
+          setCountdown(60);
         }
         else {
           setTimeout(() => setCountdown(countdown - 1), 1000);
