@@ -12,13 +12,9 @@ export default function Status({ host }: { host: IHost }) {
   const [status, setStatus] = useState(host.status);
   const [countdown, setCountdown] = useState(60);
 
-  const intervalRef = useRef<NodeJS.Timeout>(null);
-
   useEffect(() => {
-
     const checkPing = async () => {
       const { data } = await axios.get(`${URI}/api/v1/address/status/${host.id}`);
-      console.log("status", data);
       if (data.status !== status) {
         setStatus(data.status);
       }
@@ -36,22 +32,12 @@ export default function Status({ host }: { host: IHost }) {
 
         if (countdown <= 0) {
           await checkPing();
-          const intervalId = setInterval(async () => await checkPing(), 60000);
-          if(!!intervalRef.current && intervalId !== intervalRef.current){
-            clearInterval(intervalRef.current);
-            intervalRef.current = intervalId;
-          }
           setCountdown(60);
         }
         else {
           setTimeout(() => setCountdown(countdown - 1), 1000);
         }
       })();
-    }
-    return () => {
-      if (!!intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
     }
   }, [countdown, loaded]);
 
