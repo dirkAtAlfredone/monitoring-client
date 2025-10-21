@@ -3,6 +3,7 @@
 import { HostStatus, IHost } from "@/models/host";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { Badge } from "../shadcn/badge";
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
@@ -44,9 +45,10 @@ export default function Status({ host }: { host: IHost }) {
 
   return (
     <>
-      <p className="absolute">
-        status: <span>{`${status}${status === "pinging" ? "..." : `(${countdown})`}`}</span>
-      </p>
+      <Badge className={`${status === "live" ? "bg-green-500" : status === "unreachable" ? "bg-red-500" : "bg-amber-500"} absolute top-2 right-2 text-white`}>
+        {`${status}(${countdown})`}
+      </Badge>
+      
     </>
   );
 }

@@ -9,5 +9,10 @@
   --color-modal-bkg: #00000040;
 
   --breakpoint-mm: 35rem;
+
+  --shadow-card: 0 2px 4px 0 rgba(21, 21, 21, 0.06);
 }
 
+body{
+  font-family: var(--font-manrope);
+}
