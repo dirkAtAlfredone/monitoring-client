@@ -2,6 +2,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { IHost } from "@/models/host";
 import Status from "./status";
 import { Separator } from "../shadcn/separator";
+import edit from "../../../public/icons/edit-05.svg";
+import { Button } from "../shadcn/button";
+import Image from "next/image";
+import DeleteButton from "./delete-button";
+import { Tooltip, TooltipTrigger, TooltipContent } from "../shadcn/tooltip";
 
 export default function Cards({ hosts }: { hosts: IHost[] }) {
 
@@ -10,17 +15,29 @@ export default function Cards({ hosts }: { hosts: IHost[] }) {
       {
         hosts.map(host => {
           return (
-            <Card className="relative w-[21.125rem] hover:cursor-pointer shadow-card border border-[#DDE9E7]" key={host.id}>
+            <Card className="relative w-[21.125rem] shadow-card border border-[#DDE9E7] pb-2" key={host.id}>
               <CardHeader className="gap-0">
                 <CardTitle className="text-xl/[1.2] font-bold">{host.name}</CardTitle>
                 <CardDescription className="text-xs/[1.4] text-[#4C5C59]">{host.ip}</CardDescription>
-                <Separator className="bg-[#DDE9E7] mt-2"/>
+                <Status host={host} />
+                <Separator className="bg-[#DDE9E7] mt-2" />
               </CardHeader>
               <CardContent>
 
               </CardContent>
-              <CardFooter>
-                <Status host={host} />
+              <Separator className="bg-[#DDE9E7]" />
+              <CardFooter className="justify-end gap-2 pt-2">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button className="bg-white hover:bg-hover-orange hover:border-hover-orange">
+                      <Image src={edit} alt="edit icon" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Edit Info</p>
+                  </TooltipContent>
+                </Tooltip>
+                <DeleteButton />
               </CardFooter>
             </Card>
           )

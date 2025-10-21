@@ -49,7 +49,7 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, className }), "hover:cursor-pointer border border-[#DDE9E7] rounded-full p-1 h-fit")}
       {...props}
     />
   )

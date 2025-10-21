@@ -46,7 +46,7 @@ export default function Status({ host }: { host: IHost }) {
   return (
     <>
       <Badge className={`${status === "live" ? "bg-green-500" : status === "unreachable" ? "bg-red-500" : "bg-amber-500"} absolute top-2 right-2 text-white`}>
-        {`${status}(${countdown})`}
+        {`${status === "live" ? "online" : status === "unreachable" ? "offline" : "pinging"}(${countdown})`}
       </Badge>
       
     </>

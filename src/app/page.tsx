@@ -20,8 +20,8 @@ export default async function Home() {
           <span className="absolute block p-[5] bg-white rounded-xl top-[-15] border-[5] border-company-orange">
             <Image className="bg-white" src={logo} alt="alfredone logo" width={90} height={90} priority />
           </span>
-          <Button asChild>
-            <Link className="relative block border border-white border-2 text-white top-[22] right-[40] hover:bg-white hover:text-company-orange" href={"/add"}>
+          <Button className="bg-company-orange" asChild>
+            <Link className="relative block border-white border-4 p-2 rounded-xl text-company-orange hover:bg-white hover:text-company-orange mt-0 right-5 top-4.5" href={"/add"}>
               <Plus strokeWidth={4} />
               Add Address
             </Link>
