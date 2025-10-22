@@ -21,7 +21,7 @@ export default async function Home() {
             <Image className="bg-white" src={logo} alt="alfredone logo" width={90} height={90} priority />
           </span>
           <Button className="bg-company-orange" asChild>
-            <Link className="relative block border-white border-4 p-2 rounded-xl text-company-orange hover:bg-white hover:text-company-orange mt-0 right-5 top-4.5" href={"/add"}>
+            <Link className="relative block border-white border-4 p-1 rounded-xl text-company-orange hover:bg-white hover:text-company-orange mt-0 right-5 top-4.5 h-fit" href={"/add"}>
               <Plus strokeWidth={4} />
               Add Address
             </Link>

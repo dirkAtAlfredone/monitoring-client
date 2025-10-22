@@ -16,7 +16,6 @@ export default function Status({ host }: { host: IHost }) {
   useEffect(() => {
     const checkPing = async () => {
       const { data } = await axios.get(`${URI}/api/v1/address/status/${host.id}`);
-      console.log(data);
       if (data.status !== status) {
         setStatus(data.status);
       }

@@ -12,6 +12,7 @@
   --breakpoint-mm: 35rem;
 
   --shadow-card: 0 2px 4px 0 rgba(21, 21, 21, 0.06);
+  --shadow-xs: 0 0 0 1px rgba(34, 38, 39, 0.12) inset;
 }
 
 body{

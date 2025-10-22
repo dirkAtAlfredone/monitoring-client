@@ -18,3 +18,7 @@ export async function revalidate<T>(to: string, data: T) {
     }
   }
 }
+
+export async function revalidateRoute(to: string){
+  revalidatePath(to);
+}

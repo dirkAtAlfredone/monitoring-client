@@ -29,7 +29,7 @@ export default function Cards({ hosts }: { hosts: IHost[] }) {
               <CardFooter className="justify-end gap-2 pt-2">
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button className="bg-white hover:bg-hover-orange hover:border-hover-orange">
+                    <Button className="bg-white hover:bg-hover-orange hover:border-hover-orange rounded-full h-fit p-1.5 border border-[#DDE9E7]">
                       <Image src={edit} alt="edit icon" />
                     </Button>
                   </TooltipTrigger>
@@ -37,7 +37,7 @@ export default function Cards({ hosts }: { hosts: IHost[] }) {
                     <p>Edit Info</p>
                   </TooltipContent>
                 </Tooltip>
-                <DeleteButton />
+                <DeleteButton host={host} />
               </CardFooter>
             </Card>
           )
