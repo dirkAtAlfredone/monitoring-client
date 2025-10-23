@@ -1,7 +1,9 @@
+import ModalPage from "@/components/ui/modal-page";
+
 export default function Page(){
   return (
     <>
-      <h1>Reached Add</h1>
+      <ModalPage backRoute="/" />
     </>
   );
 }
