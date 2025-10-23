@@ -14,7 +14,7 @@ const URI = process.env.NEXT_PUBLIC_URI;
 
 export default function Add() {
 
-  const formRef = useRef(null);
+  const formRef = useRef<null | HTMLFormElement>(null);
   const router = useRouter();
 
   const onAddAddress = async (event: FormEvent) => {
@@ -34,10 +34,10 @@ export default function Add() {
   return (
     <>
       <Modal>
-        <form ref={formRef} onSubmit={onAddAddress} className="relative bg-white w-full h-full mm:w-[93.75%] mm:h-fit mm:top-[30%] mm:left-[50%] mm:-translate-1/2 px-6 py-4 rounded-xl max-w-[35rem] text-right">
+        <form onClick={(e) => e.stopPropagation()} ref={formRef} onSubmit={onAddAddress} className="relative bg-white w-full h-full mm:w-[93.75%] mm:h-fit mm:top-[30%] mm:left-[50%] mm:-translate-1/2 px-6 py-4 rounded-xl max-w-[35rem] text-right">
           <h2 className="font-bold text-lg text-left">New Address</h2>
           <Label htmlFor="name" className="mt-3">Name:</Label>
-          <Input id="name" name="hostname" type="text" className="mt-1 ring-company-orange focus:border-company-orange" placeholder="Server name, virtual machine, etc..." />
+          <Input autoFocus id="name" name="hostname" type="text" className="mt-1 ring-company-orange focus:border-company-orange" placeholder="Server name, virtual machine, etc..." />
           <Label htmlFor="ip" className="mt-3">Ip Address:</Label>
           <Input id="ip" name="ip" type="text" className="mt-1 ring-company-orange focus:border-company-orange" placeholder="x.x.x.x or site.com" />
           <Label htmlFor="description" className="mt-3">Description:</Label>
