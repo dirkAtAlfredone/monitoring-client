@@ -134,3 +134,19 @@ body{
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes spin{
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180);
+  }
+  100% {
+    transform: rotate(360);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear reverse infinite;
+}

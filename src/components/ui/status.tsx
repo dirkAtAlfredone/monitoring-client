@@ -2,8 +2,11 @@
 
 import { HostStatus, IHost } from "@/models/host";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge } from "../shadcn/badge";
+import { Button } from "../shadcn/button";
+import checkmark from "../../../public/icons/checkmark.svg";
+import Image from "next/image";
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
@@ -26,9 +29,10 @@ export default function Status({ host }: { host: IHost }) {
     } else {
       (async () => {
 
-        if(status === "pinging"){
-          const {data} = await axios.get(`${URI}/api/v1/ping/icmp/${host.ip}`);
+        if (status === "pinging") {
+          const { data } = await axios.get(`${URI}/api/v1/ping/icmp/${host.ip}`);
           setStatus(data.status);
+          setCountdown(60);
         }
 
         if (countdown <= 0) {
@@ -42,12 +46,16 @@ export default function Status({ host }: { host: IHost }) {
     }
   }, [countdown, loaded]);
 
-  return (
-    <>
-      <Badge className={`${status === "live" ? "bg-green-500" : status === "unreachable" ? "bg-red-500" : "bg-amber-500"} absolute top-2 right-2 text-white`}>
-        {`${status === "live" ? "online" : status === "unreachable" ? "offline" : "pinging"}(${countdown})`}
-      </Badge>
-      
-    </>
-  );
+  const handleReset = () => {
+    setStatus(HostStatus.pinging);
+  }
+
+return (
+  <div className="flex absolute top-2 right-2 gap-1">
+    <Button className={`h-fit p-0 bg-white ${status === HostStatus.pinging ? "spinner" : ""}`} onClick={handleReset}><Image src={checkmark} alt="checkmark" /></Button>
+    <Badge className={`${status === "live" ? "bg-green-500" : status === "unreachable" ? "bg-red-500" : "bg-amber-500"} text-white`}>
+      {`${status === "live" ? "online" : status === "unreachable" ? "offline" : "pinging"}${status === "pinging" ? "..." : `(${String(countdown).padStart(2, "0")})`}`}
+    </Badge>
+  </div>
+);
 }
