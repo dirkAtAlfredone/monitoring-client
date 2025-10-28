@@ -8,7 +8,7 @@ import { Textarea } from "@/components/shadcn/textarea";
 import Modal from "@/components/ui/modal";
 import { IHost } from "@/models/host";
 import { useRouter } from "next/navigation";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
@@ -16,6 +16,8 @@ export default function Add() {
 
   const formRef = useRef<null | HTMLFormElement>(null);
   const router = useRouter();
+
+  const [details, setDetails] = useState<IDetail[]>([]);
 
   const onAddAddress = async (event: FormEvent) => {
     event.preventDefault();
@@ -28,7 +30,6 @@ export default function Add() {
     if(result.success){
       router.back();
     }
-
   }
 
   return (
@@ -42,9 +43,18 @@ export default function Add() {
           <Input id="ip" name="ip" type="text" className="mt-1 ring-company-orange focus:border-company-orange" placeholder="x.x.x.x or site.com" />
           <Label htmlFor="description" className="mt-3">Description:</Label>
           <Textarea id="description" name="description" className="mt-1 ring-company-orange focus:border-company-orange" />
+          <h3>Details</h3>
+          <ul>
+            
+          </ul>
           <Button type="submit" className="bg-company-orange text-white mt-6">Submit</Button>
         </form>
       </Modal>
     </>
   );
+}
+
+interface IDetail {
+  key: string,
+  value: string
 }

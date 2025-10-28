@@ -12,7 +12,7 @@ const URI = process.env.NEXT_PUBLIC_URI;
 export default async function Home() {
 
   try {
-    const {data: hosts} = await axios.get(`${URI}/api/v1/address`);
+    const {data} = await axios.get(`${URI}/api/v1/resources`);
     
     return (
       <>
@@ -27,7 +27,7 @@ export default async function Home() {
             </Link>
           </Button>
         </header>
-        <Cards hosts={hosts}/>
+        <Cards data={data} />
       </>
     );
   } catch (e) {

@@ -7,41 +7,20 @@ import { Button } from "../shadcn/button";
 import Image from "next/image";
 import DeleteButton from "./delete-button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../shadcn/tooltip";
+import { INode, IVM } from "@/models/proxmox";
+import NodeCard from "./NodeCard";
 
-export default function Cards({ hosts }: { hosts: IHost[] }) {
+export default async function Cards({ data }: { data: { servers: INode[], vms: IVM[] } }) {
+
+  const { servers, vms } = data;
 
   return (
-    <main className="flex flex-wrap max-w-[1280px] m-auto mt-[40] justify-center gap-8">
+    <main className="flex flex-wrap max-w-[1280px] m-auto mt-[40] justify-center gap-8 pb-16">
       {
-        hosts.map(host => {
-          return (
-            <Card className="relative w-[21.125rem] shadow-card border border-[#DDE9E7] pb-2" key={host.id}>
-              <CardHeader className="gap-0">
-                <CardTitle className="text-xl/[1.2] font-bold">{host.name}</CardTitle>
-                <CardDescription className="text-xs/[1.4] text-[#4C5C59]">{host.ip}</CardDescription>
-                <Status host={host} />
-                <Separator className="bg-[#DDE9E7] mt-2" />
-              </CardHeader>
-              <CardContent>
-
-              </CardContent>
-              <Separator className="bg-[#DDE9E7]" />
-              <CardFooter className="justify-end gap-2 pt-2">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button className="bg-white hover:bg-hover-orange hover:border-hover-orange rounded-full h-fit p-1.5 border border-[#DDE9E7]">
-                      <Image src={edit} alt="edit icon" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Edit Info</p>
-                  </TooltipContent>
-                </Tooltip>
-                <DeleteButton host={host} />
-              </CardFooter>
-            </Card>
-          )
-        })
+        servers.map(server => {
+          return <NodeCard key={server.id} server={server} />
+        }
+        )
       }
     </main>
   );
