@@ -52,7 +52,7 @@ export default function Status({ status, id }: { status: "online" | "offline", i
     <div className="flex absolute top-2 right-2 gap-1">
       <Button className={`h-fit p-0 bg-white ${spinner ? "spinner" : ""}`} onClick={handleReset} disabled={spinner} ><Image src={checkmark} alt="checkmark" /></Button>
       <Badge className={`${status === "online" ? "bg-green-500" : "bg-red-500"} text-white`}>
-        {status}&nbsp;{`(${String(countdown).padStart(2, "0")})`}
+        {current}&nbsp;{`(${String(countdown).padStart(2, "0")})`}
       </Badge>
     </div>
   );
