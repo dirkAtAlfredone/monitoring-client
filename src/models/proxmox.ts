@@ -8,6 +8,7 @@ export interface INode {
   uptime: number;
   type: 'node';
   id: string;
+  tags: string[];
 }
 
 export interface IVM {
@@ -22,7 +23,8 @@ export interface IVM {
   maxmem: number;
   uptime: number;
   [key: string]: any;
-  id: string
+  id: string;
+  tags: string[];
 }
 
 export interface INodeNet {  

@@ -1,54 +1,57 @@
 import { INode, INodeNet } from "@/models/proxmox";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../shadcn/card";
 import { Separator } from "../shadcn/separator";
-import axios from "axios";
 import Status from "./status";
+import { Badge } from "../shadcn/badge";
+import { getContrastingTextColor, getRandomColor } from "@/lib/colors";
 
-const URI = process.env.NEXT_PUBLIC_URI;
-
-export default async function NodeCard({server}: {server: INode}){
-
-  const {data} = await axios.get<INodeNet[]>(`${URI}/api/v1/resources/dns/${server.id}`);
+export default async function NodeCard({ server, network }: { server: INode, network: INodeNet[] }) {
 
   return (
-    <>
-    <Card className="relative w-[21.125rem] shadow-card border border-[#DDE9E7] pb-2">
-              <CardHeader className="gap-0">
-                <CardTitle className="text-xl/[1.2] font-bold">{server.node.toUpperCase()}</CardTitle>
-                <CardDescription className="text-xs/[1.4] text-[#4C5C59]">
-                  <ul>
-                    {
-                      data.map(ip => {
-                        return (
-                          <li key={ip.address}>
-                            {ip.address}
-                          </li>
-                        );
-                      })
-                    }
-                  </ul>
-                </CardDescription>
-                <Status status={server.status} id={server.id} />
-                <Separator className="bg-[#DDE9E7] mt-2" />
-              </CardHeader>
-              <CardContent>
+    <a className="" href={`https://${network[0].address}:8006`} target="_blank">
+      <Card className="relative w-[21.125rem] shadow-card border border-[#DDE9E7] pb-2">
+        <CardHeader className="gap-0">
+          <CardTitle className="text-xl/[1.2] font-bold">{server.node.toUpperCase()}</CardTitle>
+          <CardDescription className="text-xs/[1.4] text-[#4C5C59]">
+            <ul>
+              {
+                network.map(ip => {
+                  return (
+                    <li key={ip.address}>
+                      {ip.address}
+                    </li>
+                  );
+                })
+              }
+            </ul>
+            <ul className="flex gap-0.5 pt-2">
+              {
+                server.tags.map(tag => {
+                  const bg = getRandomColor();
+                  const textColor = getContrastingTextColor(bg);
+                  const classes = `bg-[${bg}] ${textColor}`;
+                  console.log(classes)
+                  return (
+                    <li key={tag}>
+                      <Badge className="px-1 py-[1px] text-[10px]/[1.4]" style={{ backgroundColor: bg, color: textColor }}>
+                        {tag.toLowerCase()}
+                      </Badge>
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </CardDescription>
+          <Status status={server.status} id={server.id} />
+        </CardHeader>
+        <CardContent className="mt-2">
 
-              </CardContent>
-              <Separator className="bg-[#DDE9E7]" />
-              {/* <CardFooter className="justify-end gap-2 pt-2">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button className="bg-white hover:bg-hover-orange hover:border-hover-orange rounded-full h-fit p-1.5 border border-[#DDE9E7]">
-                      <Image src={edit} alt="edit icon" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Edit Info</p>
-                  </TooltipContent>
-                </Tooltip>
-                <DeleteButton host={host} />
-              </CardFooter> */}
-            </Card>
-    </>
+        </CardContent>
+        <Separator className="bg-[#DDE9E7]" />
+        <CardFooter className="justify-start gap-0.5 pt-2 text-[11px] text-[#c3bfbc] tracking-tighter">
+          {`https://${network[0].address}:8006`}
+        </CardFooter>
+      </Card>
+    </a>
   );
 }
