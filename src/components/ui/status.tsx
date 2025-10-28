@@ -2,7 +2,7 @@
 
 import { HostStatus, IHost } from "@/models/host";
 import axios from "axios";
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Badge } from "../shadcn/badge";
 import { Button } from "../shadcn/button";
 import checkmark from "../../../public/icons/checkmark.svg";
@@ -49,10 +49,10 @@ export default function Status({ status, id }: { status: "online" | "offline", i
   }
 
   return (
-    <div className="flex absolute top-2 right-2 gap-1">
-      <Button className={`h-fit p-0 bg-white ${spinner ? "spinner" : ""}`} onClick={handleReset} disabled={spinner} ><Image src={checkmark} alt="checkmark" /></Button>
-      <Badge className={`${status === "online" ? "bg-green-500" : "bg-red-500"} text-white`}>
-        {current}&nbsp;{`(${String(countdown).padStart(2, "0")})`}
+    <div className="flex absolute top-2 right-2 gap-0.5 items-center">
+      <Button className={`h-fit p-0.5 rounded-b-full hover:bg-[#FFE6D6] bg-white ${spinner ? "spinner" : ""}`} onClick={handleReset} disabled={spinner} ><Image className="w-[80%] h-[80%] object-cover" src={checkmark} alt="checkmark" /></Button>
+      <Badge className={`${spinner ? "bg-amber-500" : status === "online" ? "bg-green-500" : "bg-red-500"} text-white`}>
+        {spinner ? "pending" : current}&nbsp;{spinner ? "..." : `(${String(countdown).padStart(2, "0")})`}
       </Badge>
     </div>
   );

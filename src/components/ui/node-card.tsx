@@ -1,8 +1,6 @@
 import { INode, INodeNet } from "@/models/proxmox";
-import { Button } from "../shadcn/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../shadcn/card";
 import { Separator } from "../shadcn/separator";
-import { Tooltip, TooltipTrigger } from "../shadcn/tooltip";
 import axios from "axios";
 import Status from "./status";
 
