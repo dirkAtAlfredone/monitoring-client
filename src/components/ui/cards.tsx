@@ -1,14 +1,5 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/shadcn/card";
-import { IHost } from "@/models/host";
-import Status from "./status";
-import { Separator } from "../shadcn/separator";
-import edit from "../../../public/icons/edit-05.svg";
-import { Button } from "../shadcn/button";
-import Image from "next/image";
-import DeleteButton from "./delete-button";
-import { Tooltip, TooltipTrigger, TooltipContent } from "../shadcn/tooltip";
 import { INode, IVM } from "@/models/proxmox";
-import NodeCard from "./NodeCard";
+import NodeCard from "./node-card";
 
 export default async function Cards({ data }: { data: { servers: INode[], vms: IVM[] } }) {
 

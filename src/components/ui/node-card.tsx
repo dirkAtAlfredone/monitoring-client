@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from "../shadcn/separator";
 import { Tooltip, TooltipTrigger } from "../shadcn/tooltip";
 import axios from "axios";
+import Status from "./status";
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
@@ -29,7 +30,7 @@ export default async function NodeCard({server}: {server: INode}){
                     }
                   </ul>
                 </CardDescription>
-                {/* <Status host={host} /> */}
+                <Status status={server.status} id={server.id} />
                 <Separator className="bg-[#DDE9E7] mt-2" />
               </CardHeader>
               <CardContent>
