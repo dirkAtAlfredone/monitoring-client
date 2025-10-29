@@ -9,7 +9,7 @@ import Image from "next/image";
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
-export default function VMStatus({ status, id }: { status: 'running' | 'stopped' | 'paused', id: string }) {
+export default function VMStatus({ status, id, node }: { status: 'running' | 'stopped' | 'paused', id: string, node: string }) {
 
   const [current, setCurrent] = useState(status);
   const [countdown, setCountdown] = useState(60);
@@ -21,7 +21,7 @@ export default function VMStatus({ status, id }: { status: 'running' | 'stopped'
     if (countdown === 0) {
       (async () => {
         setSpinner(true);
-        const { data } = await axios.get(`${URI}/api/v1/resources/status/${id}`);
+        const { data } = await axios.get(`${URI}/api/v1/resources/status/${node}/${id}`);
         setCurrent(data.status);
         setSpinner(false);
         setCountdown(60);
@@ -41,7 +41,7 @@ export default function VMStatus({ status, id }: { status: 'running' | 'stopped'
     e.preventDefault();
     setSpinner(true);
     (async () => {
-      const { data } = await axios.get(`${URI}/api/v1/resources/status/${id}`);
+      const { data } = await axios.get(`${URI}/api/v1/resources/status/${node}/${id}`);
       setCurrent(data.status);
     setSpinner(false);
     setCountdown(60);

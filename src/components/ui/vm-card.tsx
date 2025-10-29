@@ -41,7 +41,7 @@ export default function VMCard({server, network}: {server: IVM, network: IVMNet[
             }
           </ul>
         </CardDescription>
-        <VMStatus status={server.status} id={server.id} />
+        <VMStatus status={server.status} id={server.id} node={server.node} />
       </CardHeader>
       <CardContent className="mt-2">
 
