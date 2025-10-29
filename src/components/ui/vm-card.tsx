@@ -15,24 +15,23 @@ export default function VMCard({server, network}: {server: IVM, network: IVMNet[
         <CardTitle className="text-xl/[1.2] font-bold">{server.name}</CardTitle>
         <CardDescription className="text-xs/[1.4] text-[#4C5C59]">
           <ul>
-            {
+            { !!addresses.length ?
               addresses.map(ip => {
                 return (
                   <li key={ip}>
                     {ip}
                   </li>
                 );
-              })
+              }) : <p>QEMU guest agent not enabled</p>
             }
           </ul>
           <ul className="flex gap-0.5 pt-2">
             {
               server.tags.map(tag => {
                 const bg = getRandomColor();
-                const textColor = getContrastingTextColor(bg);
                 return (
                   <li key={tag}>
-                    <Badge className="px-1 py-[1px] text-[10px]/[1.4]" style={{ backgroundColor: bg, color: textColor }}>
+                    <Badge className="px-1 py-[1px] text-[10px]/[1.4] text-white" style={{ backgroundColor: bg }}>
                       {tag.toLowerCase()}
                     </Badge>
                   </li>
