@@ -25,7 +25,7 @@ export default async function Cards({ data }: { data: { servers: INode[], vms: I
             const { data } = await axios.get<IVMNet[]>(`${URI}/api/v1/resources/ip/vm/${vm.node}/${vm.vmid}`);
             network = [...data];
           } catch (e) {
-            // console.log(e);
+            console.log(e);
           }
           return <VMCard key={vm.id} server={vm} network={network} />
         })

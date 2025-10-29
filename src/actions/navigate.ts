@@ -13,6 +13,7 @@ export async function revalidate<T>(to: string, data: T) {
       success: true
     }
   } catch (e) {
+    console.log(e);
     return {
       success: false
     }

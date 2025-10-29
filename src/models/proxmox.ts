@@ -22,7 +22,6 @@ export interface IVM {
   mem: number;
   maxmem: number;
   uptime: number;
-  [key: string]: any;
   id: string;
   tags: string[];
 }

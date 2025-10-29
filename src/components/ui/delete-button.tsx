@@ -8,17 +8,14 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { IHost } from "@/models/host";
 import axios from "axios";
 import { revalidateRoute } from "@/actions/navigate";
-import { useRouter } from "next/navigation";
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
 export default function DeleteButton({ host }: { host: IHost }) {
 
-  const router = useRouter();
-
   const handleDelete = async () => {
     console.log(`${URI}/api/v1/address/delete`);
-    const { data, status } = await axios.post(`${URI}/api/v1/address/delete`, {id: host.id});
+    const { status } = await axios.post(`${URI}/api/v1/address/delete`, {id: host.id});
     if(status === 204){
       revalidateRoute("/");
     }

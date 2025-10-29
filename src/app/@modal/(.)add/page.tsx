@@ -8,16 +8,12 @@ import { Textarea } from "@/components/shadcn/textarea";
 import Modal from "@/components/ui/modal";
 import { IHost } from "@/models/host";
 import { useRouter } from "next/navigation";
-import { FormEvent, useRef, useState } from "react";
-
-const URI = process.env.NEXT_PUBLIC_URI;
+import { FormEvent, useRef } from "react";
 
 export default function Add() {
 
   const formRef = useRef<null | HTMLFormElement>(null);
   const router = useRouter();
-
-  const [details, setDetails] = useState<IDetail[]>([]);
 
   const onAddAddress = async (event: FormEvent) => {
     event.preventDefault();

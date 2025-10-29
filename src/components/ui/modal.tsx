@@ -8,7 +8,7 @@ export default function Modal({children}: {children: ReactNode}){
   const modalBgRef = useRef(null);
   const router = useRouter();
 
-  const backgroundClick = (e: MouseEvent) => {
+  const backgroundClick = () => {
     router.back();
   }
 
