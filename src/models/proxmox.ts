@@ -44,3 +44,8 @@ export interface INodeNet {
   bridge_ports?: string;
   families?: ("inet" | "inet6")[]
 }
+
+export interface IVMNet {
+  name: string,
+  addresses: string[]
+}

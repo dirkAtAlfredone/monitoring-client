@@ -1,7 +1,7 @@
 import { INode, INodeNet } from "@/models/proxmox";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../shadcn/card";
 import { Separator } from "../shadcn/separator";
-import Status from "./status";
+import ServerStatus from "./server-status";
 import { Badge } from "../shadcn/badge";
 import { getContrastingTextColor, getRandomColor } from "@/lib/colors";
 
@@ -29,8 +29,6 @@ export default async function NodeCard({ server, network }: { server: INode, net
                 server.tags.map(tag => {
                   const bg = getRandomColor();
                   const textColor = getContrastingTextColor(bg);
-                  const classes = `bg-[${bg}] ${textColor}`;
-                  console.log(classes)
                   return (
                     <li key={tag}>
                       <Badge className="px-1 py-[1px] text-[10px]/[1.4]" style={{ backgroundColor: bg, color: textColor }}>
@@ -42,7 +40,7 @@ export default async function NodeCard({ server, network }: { server: INode, net
               }
             </ul>
           </CardDescription>
-          <Status status={server.status} id={server.id} />
+          <ServerStatus status={server.status} id={server.id} />
         </CardHeader>
         <CardContent className="mt-2">
 
